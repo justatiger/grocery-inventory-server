@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
 import productRoutes from "./routes/productRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
 
 const app = express();
 dotenv.config();
@@ -12,6 +13,7 @@ app.use(express.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
 app.use("/products", productRoutes);
+app.use("/auth", authRoutes);
 app.get("/", (req, res) => {
   res.send("Hello from Samuel's Grocery Store API");
 });

@@ -9,24 +9,26 @@ import {
   updateProduct,
 } from "../controllers/productControllers.js";
 
+import { protect } from "../middleware/authMiddleware.js";
+
 const router = express.Router();
 
 // GET all products from db
-router.get("/", getAllProducts);
+router.get("/", protect, getAllProducts);
 
 // GET a product from db
-router.get("/:id", getProductById);
+router.get("/:id", protect, getProductById);
 
 // CREATE a product
-router.post("/", createProduct);
+router.post("/", protect, createProduct);
 
 // router.patch('/:id', updatePost);
-router.patch("/:id", updateProduct);
+router.patch("/:id", protect, updateProduct);
 
 // DELETE by id
-router.delete("/:id", deleteProduct);
+router.delete("/:id", protect, deleteProduct);
 
 // BATCH DELETE
-router.route("/delete").post(deleteMultiProduct);
+router.route("/delete").post(protect, deleteMultiProduct);
 
 export default router;
