@@ -4,6 +4,7 @@ import Product from "../models/productModel.js";
 
 const router = express.Router();
 
+// Database function to get all products
 export const getAllProducts = async (req, res) => {
   try {
     const products = await Product.find({});
@@ -15,6 +16,7 @@ export const getAllProducts = async (req, res) => {
   }
 };
 
+// Database function to get 1 products
 export const getProductById = async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
@@ -26,6 +28,7 @@ export const getProductById = async (req, res) => {
   }
 };
 
+// Database function to create a product
 export const createProduct = async (req, res) => {
   const { name, description, price, quantity, imageUrl } = req.body;
 
@@ -46,6 +49,7 @@ export const createProduct = async (req, res) => {
   }
 };
 
+// Database function to delete a product
 export const deleteProduct = async (req, res) => {
   const { id } = req.params;
 
@@ -58,6 +62,7 @@ export const deleteProduct = async (req, res) => {
   res.json({ message: "Product deleted successfully." });
 };
 
+// Database function to delete all selected products
 export const deleteMultiProduct = async (req, res) => {
   if (req.body.length > 0) {
     await Product.deleteMany({
@@ -71,6 +76,7 @@ export const deleteMultiProduct = async (req, res) => {
   }
 };
 
+// Database function to date a product
 export const updateProduct = async (req, res) => {
   const { id } = req.params;
   const { name, description, price, quantity, imageUrl } = req.body;
@@ -91,13 +97,6 @@ export const updateProduct = async (req, res) => {
   await Product.findByIdAndUpdate(id, updatedProduct, { new: true });
 
   res.json(updatedProduct);
-
-  // const existProduct = await Prodcut.findById(id);
-  // existProduct.name = name || existProduct.name;
-  // existProduct.description = description || existProduct.description;
-  // existProduct.price = price || existProduct.price;
-  // existProduct.quantity = quantity || existProduct.quantity;
-  // existProduct.imageUrl = imageUrl || existProduct.imageUrl;
 };
 
 export default router;

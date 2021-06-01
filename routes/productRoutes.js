@@ -22,7 +22,7 @@ router.get("/:id", protect, getProductById);
 // CREATE a product
 router.post("/", protect, createProduct);
 
-// router.patch('/:id', updatePost);
+// UPDATE a product
 router.patch("/:id", protect, updateProduct);
 
 // DELETE by id

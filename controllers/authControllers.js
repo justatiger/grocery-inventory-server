@@ -2,6 +2,7 @@ import asyncHandler from "express-async-handler";
 import User from "../models/userModel.js";
 import generateToken from "../utils/generateToken.js";
 
+// Database function to register a new user
 const registerUser = asyncHandler(async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
 
@@ -47,6 +48,7 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 });
 
+// Database function to login a user
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 

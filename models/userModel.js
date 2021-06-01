@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 
+// Database schema for user login
 const userSchema = mongoose.Schema({
   firstName: String,
   lastName: String,
@@ -12,10 +13,12 @@ const userSchema = mongoose.Schema({
   },
 });
 
+// Check for matching password
 userSchema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
 
+// Hash the password
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
     next();
